@@ -1,0 +1,59 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin",
+  "preferredVersions": {
+    "php": "8.4",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "GatherPress Target Groups",
+        "blogdescription": "Enhancing GatherPress with target group functionality.",
+        "users_can_register": 1,
+        "permalink_structure": "/%year%/%monthnum%/%postname%/"
+      }
+    },
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+          "GATHERPRESS_ALPHA_VERSION": 1
+      }
+    },
+    {
+      "step": "login",
+      "username": "admin"
+    },
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github.com/GatherPress/gatherpress/releases/download/0.34.0-beta.2/gatherpress.0.34.0-beta.2.zip"
+			},
+      "options": {
+          "activate": true
+      }
+		},
+    {
+      "step": "installPlugin",
+      "pluginData": {
+          "resource": "url",
+          "url": "https://github.com/carstingaxion/gatherpress-targetgroups/releases/latest/download/gatherpress-targetgroups.zip"
+      },
+      "options": {
+          "activate": true
+      }
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/GatherPress/gatherpress-demo-data/main/GatherPress-demo-data-0.34.0.xml"
+      }
+    }
+  ]
+}
